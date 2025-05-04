@@ -44,8 +44,8 @@ def webhook():
             return 'ok', 200
         else:
             abort(403)
-    except Exception as e:
-        logging.exception(f"Ошибка в webhook: {e}")
+    except Exception as err:
+        logging.exception(f"Ошибка в webhook: {err}")
         return 'error', 500
 
 
@@ -66,15 +66,6 @@ if __name__ == '__main__':
         markup.add(types.InlineKeyboardButton("I'm fond of adventures!", callback_data='v put'))
         markup.add(types.InlineKeyboardButton("OMG! I'm scared", callback_data='otkaz'))
         bot.send_message(message.chat.id, text, reply_markup=markup)
-
-
-    # @bot.message_handler(func=lambda message: True)
-    # def echo_all(message):
-    #     logging.info(f"Получено сообщение от пользователя {message.chat.id}: {message.text}")
-    #     try:
-    #         bot.reply_to(message, message.text)
-    #     except Exception as e:
-    #         logging.exception(f"Ошибка в обработчике echo_all: {e}")
 
 
     @bot.callback_query_handler(func=lambda call: True)
@@ -105,9 +96,12 @@ if __name__ == '__main__':
                 "main attraction of the square — the Peter and Paul Cathedral — was destroyed in 1935."
                 "What is the contemporary name of this square?"
             )
-            bot.send_message(call.message.chat.id, text)
+            photo = open('img/svo.jpg', 'rb')
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             user_data[call.message.chat.id] = "new_1"
         elif call.data == 'n1':
+            photo = open('img/admin.jpg', 'rb')
             text = (
                 "Take a selfie so that the wooden facade of the former Administration of the Altai Mining District "
                 "is visible in the background. This wooden building was built in 1898 in the classical style, with "
@@ -115,8 +109,10 @@ if __name__ == '__main__':
             )
             markup = types.InlineKeyboardMarkup()
             markup.add(types.InlineKeyboardButton(text="I did it!", callback_data="z2"))
-            bot.send_message(call.message.chat.id, text, reply_markup=markup)
+            bot.send_photo(call.message.chat.id, photo, caption=text, reply_markup=markup)
+            photo.close()
         elif call.data == 'z2':
+            photo = open('img/miller.jpg', 'rb')
             text = (
                 "You are in the most mystical, most mysterious place of the ancient mining city of Barnaul. Ghosts still "
                 "inhabit this place, carefully guarding the secrets of the past. One of the most mysterious stories of "
@@ -125,15 +121,18 @@ if __name__ == '__main__':
                 "this street. Decipher the name of the pharmacist, and he will lead you to his workplace.\n"
                 "3-8-18-9-19-20-9-1-14   13-9-12-12-5-18."
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
             user_data[call.message.chat.id] = "waiting_for_message_1"
+            photo.close()
         elif call.data == 'z3':
+            photo = open('img/apteka.jpg', 'rb')
             text = (
                 "Hint: Polzunova St. 42, Mountain Pharmacy"
             )
             markup = types.InlineKeyboardMarkup()
             markup.add(types.InlineKeyboardButton(text="I'm here'!", callback_data="n2"))
-            bot.send_message(call.message.chat.id, text, reply_markup=markup)
+            bot.send_photo(call.message.chat.id, photo, caption=text, reply_markup=markup)
+            photo.close()
         elif call.data == 'n2':
             text = (
                 "Christian Miller lived and worked in the building of the "
@@ -145,14 +144,17 @@ if __name__ == '__main__':
                 "yourself. The ticket price is 80 rubles."
             )
             bot.send_message(call.message.chat.id, text)
+            photo = open('img/street.jpg', 'rb')
             text = (
                 "Now, Christian Miller and his daughter invite you to take a walk along Petropavlovskaya Street. That's "
                 "what it used to be called, but the new name of the street is associated with a famous Barnaul inventor, "
                 "the developer of the first steam engine.\nQuestion: What is Petropavlovskaya Street called now?"
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
             user_data[call.message.chat.id] = "waiting_for_message_2"
+            photo.close()
         elif call.data == 'z4':
+            photo = open('img/museum.jpg', 'rb')
             text = (
                 "The ghosts of the past invite you to solve the next riddle. You can find it near the building of the "
                 "Mining Laboratory — the main chemical laboratory of the Altai plants. This is where analyses of the mined "
@@ -162,9 +164,11 @@ if __name__ == '__main__':
                 "Laboratory?"
 
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
             user_data[call.message.chat.id] = "waiting_for_message_3"
+            photo.close()
         elif call.data == 'z5':
+            photo = open('img/demid.jpg', 'rb')
             text = (
                 "You are now at the local history museum, which is celebrating its 200th anniversary in 2023. However, "
                 "this site originally housed the mining laboratory, where chemical analyses of mined ore and smelted "
@@ -174,9 +178,11 @@ if __name__ == '__main__':
                 "founding of Barnaul? The square, in the center of which stands a pillar commemorating the 100th "
                 "anniversary of mining in Altai, is named after him."
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             user_data[call.message.chat.id] = "waiting_for_message_4"
         elif call.data == 'z6':
+            photo = open('img/stolp.jpg', 'rb')
             text = (
                 "The most mystical and majestic place in the city is undoubtedly Demidovskaya Square. This is a place "
                 "where the shadow of the Demidov curse can still be felt.Akinfiy Demidov never visited Altai, but he is "
@@ -185,7 +191,8 @@ if __name__ == '__main__':
                 "(after Yekaterinburg), was founded, becoming a new source of state revenue. Before his death, Akinfiy "
                 "Demidov cursed Barnaul and all its inhabitants. What is this curse? And how was it overcome?"
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             markup = types.InlineKeyboardMarkup()
             markup.add(types.InlineKeyboardButton("Open video", url="https://www.youtube.com/watch?v=5N9eUgfcL90"))
             text = (
@@ -196,6 +203,7 @@ if __name__ == '__main__':
             bot.send_message(call.message.chat.id, text, reply_markup=markup)
             user_data[call.message.chat.id] = "waiting_for_message_5"
         elif call.data == 'z7':
+            photo = open('img/alex_1.jpg', 'rb')
             text = (
                 "There is a belief: if you walk around the Demidov pillar three times and leave a coin at its base each "
                 "time, you may become a wealthy person. Just keep in mind that wealth is understood differently by "
@@ -203,9 +211,11 @@ if __name__ == '__main__':
                 "this monument erected to commemorate the 100th anniversary of mining in Altai?\nWrite the name of this "
                 "Russian emperor in the chat."
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             user_data[call.message.chat.id] = "waiting_for_message_6"
         elif call.data == 'z8':
+            photo = open('img/silver.jpg', 'rb')
             text = (
                 "In 1771, Barnaul received the status of a 'Mining City,' and all buildings and structures constructed here"
                 "were for mining purposes. Thus, the Mining School, Mining Hospital, and an almshouse for disabled workers "
@@ -216,8 +226,8 @@ if __name__ == '__main__':
                 "Square 300 years ago? Rumors say that about 700 kilograms of pure silver from the time of Akinfiy Demidov "
                 "are hidden there."
             )
-            bot.send_message(call.message.chat.id, text)
-
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             user_data[call.message.chat.id] = "waiting_for_message_7"
         elif call.data == 'z9':
             text = (
@@ -240,6 +250,7 @@ if __name__ == '__main__':
                 "repurposed for silver smelting and became the largest silver smelting plant in Siberia."
             )
             bot.send_message(call.message.chat.id, text)
+            photo = open('img/mirror.jpg', 'rb')
             text = (
                 "Close your eyes… Listen… It is said that the souls of the workers of this plant still cannot leave this "
                 "place and wander the plant to this day. In the evenings, the shadow of a man in dark clothing appears "
@@ -249,21 +260,25 @@ if __name__ == '__main__':
                 "otherworldly? This object has the ability to preserve the energies of people and things around it. It is "
                 "said that you can see the reflection of a ghost in it…"
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
+            photo = open('img/spich.jpg', 'rb')
             text = (
                 "Find this object—it will help you answer Akinfiy Demidov's question: What was located in this building "
                 "during the Soviet years?\nCipher: YROTCAFHCTAMLUANRAB"
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
             user_data[call.message.chat.id] = "waiting_for_message_9"
         elif call.data == 'z11':
+            photo = open('img/phil.jpg', 'rb')
             text = (
                 "The residents of Barnaul have always worked hard and loved to relax. Return to the street of the famous "
                 "inventor and head to a beautiful building constructed in the pseudo-Russian style over 100 years ago. The "
                 "number of windows on its facade indicates the year of construction. Find out what is currently located in "
                 "this building."
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             user_data[call.message.chat.id] = "waiting_for_message_10"
         elif call.data == 'z12':
             photo = open('img/img_1.png', 'rb')
@@ -314,13 +329,15 @@ if __name__ == '__main__':
             bot.send_message(call.message.chat.id, text)
             user_data[call.message.chat.id] = "waiting_for_message_14"
         elif call.data == 'z16':
+            photo = open('img/park.jpg', 'rb')
             text = (
                 "You are at the foot of Nagorny Park—the most ambiguous place in the city. In 1772, it was decided to open "
                 "a Nagorny Cemetery here. Over a century and a half, many famous townspeople, scientists, public figures, "
                 "merchants, and explorers of Altai were buried here. Climbing the stairs and counting the number of "
                 "flights, you will recall and forever remember the year of Barnaul's founding in the 18th century."
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             text = (
                 "Nagorny Park carefully preserves the history of the city. Here lie the eternal rest of the famous Russian "
                 "publicist, writer, and explorer of Altai, Nikolai Yadrintsev (streets in Barnaul, Omsk, Novosibirsk, and "
@@ -336,13 +353,15 @@ if __name__ == '__main__':
                 "of the past."
             )
             bot.send_message(call.message.chat.id, text)
+            photo = open('img/leter.jpg', 'rb')
             text = (
                 '"Dear descendants!\nOn the banks of this remarkable river, we built a wonderful city.We bequeath to you '
                 'to preserve and protect the riches of our land.Remember us—we poured our souls into this city.Preserve '
                 'history, honor your ancestors!We promise to no longer disturb the residents of the city and will help you '
                 'multiply  your wealth!"'
             )
-            bot.send_message(call.message.chat.id, text)
+            bot.send_photo(call.message.chat.id, photo, caption=text)
+            photo.close()
             user_data[call.message.chat.id] = "waiting_for_message_15"
 
         bot.answer_callback_query(call.id)
