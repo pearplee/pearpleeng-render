@@ -93,7 +93,7 @@ if __name__ == '__main__':
                 "Head to the starting "
                 "point of our adventure — the oldest square in the city, which for many years "
                 "was the administrative and cultural center of the city. The square lost its historical name Sobornaya in 1917. The "
-                "main attraction of the square — the Peter and Paul Cathedral — was destroyed in 1935."
+                "main attraction of the square — the Peter and Paul Cathedral — was destroyed in 1935. "
                 "What is the contemporary name of this square?"
             )
             photo = open('img/svo.jpg', 'rb')
@@ -101,7 +101,7 @@ if __name__ == '__main__':
             photo.close()
             user_data[call.message.chat.id] = "new_1"
         elif call.data == 'n1':
-            photo = open('img/admin.jpg', 'rb')
+            photo = open('img/meria.jpg', 'rb')
             text = (
                 "Take a selfie so that the wooden facade of the former Administration of the Altai Mining District "
                 "is visible in the background. This wooden building was built in 1898 in the classical style, with "
@@ -198,7 +198,7 @@ if __name__ == '__main__':
             text = (
                 "Listen to "
                 "the story of the creation of Demidovskaya Square and answer the question: What helped overcome Demidov's "
-                "curse"
+                " curse"
             )
             bot.send_message(call.message.chat.id, text, reply_markup=markup)
             user_data[call.message.chat.id] = "waiting_for_message_5"
@@ -217,7 +217,7 @@ if __name__ == '__main__':
         elif call.data == 'z8':
             photo = open('img/silver.jpg', 'rb')
             text = (
-                "In 1771, Barnaul received the status of a 'Mining City,' and all buildings and structures constructed here"
+                "In 1771, Barnaul received the status of a 'Mining City,' and all buildings and structures constructed here "
                 "were for mining purposes. Thus, the Mining School, Mining Hospital, and an almshouse for disabled workers "
                 "of the Silver Smelting Plant appeared on Demidovskaya Square. Take a closer look—all the buildings "
                 "resemble each other in architecture: two-story, squat, with a solid foundation, likely capable of "
@@ -231,7 +231,7 @@ if __name__ == '__main__':
             user_data[call.message.chat.id] = "waiting_for_message_7"
         elif call.data == 'z9':
             text = (
-                "According to legends, silver in Barnaul is not only deep underground but also on the surface. In fact, we"
+                "According to legends, silver in Barnaul is not only deep underground but also on the surface. In fact, we "
                 "walk on streets paved with silver. Why? In the past, the central streets of Barnaul were paved with slag "
                 "left after silver processing. However, due to imperfect technology, particles of the precious metal "
                 "remained in the slag.Decipher the message from the shadow of Demidov – this is the original name of the "
@@ -352,7 +352,10 @@ if __name__ == '__main__':
                 "supervised work at all Altai mines. At Kozma Frolov's grave, you will receive a message from the ghosts "
                 "of the past."
             )
-            bot.send_message(call.message.chat.id, text)
+            markup = types.InlineKeyboardMarkup()
+            markup.add(types.InlineKeyboardButton(text="I'm here'!", callback_data="nag"))
+            bot.send_message(call.message.chat.id, text, reply_markup=markup)
+        elif call.data == 'nag':
             photo = open('img/leter.jpg', 'rb')
             text = (
                 '"Dear descendants!\nOn the banks of this remarkable river, we built a wonderful city.We bequeath to you '
@@ -488,7 +491,7 @@ if __name__ == '__main__':
                 markup.add(types.InlineKeyboardButton(text="Let's go!", callback_data="z13"))
                 markup.add(types.InlineKeyboardButton(text="We're shrinking! Bye!!", callback_data="otkaz"))
                 text = (
-                    'Indeed, the site of the modern Philharmonic was once occupied by the guardhouse—the city prison of the'
+                    'Indeed, the site of the modern Philharmonic was once occupied by the guardhouse—the city prison of the '
                     'silver smelting plant. The prison building, office, and tool shop, located along Petropavlovskaya '
                     'Street, were connected at that time by solid stone fences with decorative porticos.'
                 )
