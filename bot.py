@@ -194,7 +194,7 @@ if __name__ == '__main__':
             bot.send_photo(call.message.chat.id, photo, caption=text)
             photo.close()
             markup = types.InlineKeyboardMarkup()
-            markup.add(types.InlineKeyboardButton("Open video", url="https://www.youtube.com/watch?v=5N9eUgfcL90"))
+            markup.add(types.InlineKeyboardButton("Open video", url="https://rutube.ru/video/adacc1aae23f76bf201504891ab0da00/"))
             text = (
                 "Listen to "
                 "the story of the creation of Demidovskaya Square and answer the question: What helped overcome Demidov's "
